@@ -55,49 +55,59 @@
     .hero-sub {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
-      font-size: clamp(14px, 1.5vw, 18px);
+      font-size: clamp(13px, 1.4vw, 17px);
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--blue);
-      margin-bottom: 16px;
-    }
-
-    .hero-title-wrap {
-      position: relative;
-      display: inline-block;
-      line-height: 0.88;
-    }
-
-    .hero-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(80px, 16vw, 220px);
-      text-transform: uppercase;
-      color: var(--blue);
-      letter-spacing: -0.01em;
-      display: block;
+      margin-bottom: 20px;
       position: relative;
       z-index: 1;
     }
 
+    .hero-title-wrap {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      line-height: 0.85;
+      z-index: 1;
+    }
+
+    .hero-title-line {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(100px, 21vw, 280px);
+      text-transform: uppercase;
+      color: var(--blue);
+      letter-spacing: -0.02em;
+      display: block;
+    }
+
+    .hero-title-line2 {
+      position: relative;
+      display: inline-block;
+    }
+
     .hero-cursive {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(50px, 10vw, 140px);
+      font-size: clamp(44px, 9vw, 120px);
       color: var(--orange);
       position: absolute;
-      bottom: -0.15em;
-      right: -0.05em;
+      bottom: -0.3em;
+      right: -0.1em;
       z-index: 2;
       pointer-events: none;
+      white-space: nowrap;
     }
 
     .hero-desc {
-      margin-top: 60px;
-      max-width: 620px;
+      margin-top: 56px;
+      max-width: 580px;
       font-size: clamp(14px, 1.2vw, 16px);
       line-height: 1.7;
       color: #444;
       font-weight: 300;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-bullets {
@@ -105,6 +115,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 40px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-bullet { display: flex; flex-direction: column; gap: 6px; }
@@ -126,12 +138,12 @@
       max-width: 160px;
     }
 
-    /* ── MARQUEE TICKER ───────────────────────────────── */
+    /* ── TICKER ───────────────────────────────────────── */
     .ticker {
       border-top: 1.5px solid var(--border);
       border-bottom: 1.5px solid var(--border);
       overflow: hidden;
-      padding: 18px 0;
+      padding: 16px 0;
       background: var(--white);
     }
 
@@ -151,26 +163,25 @@
     .ticker-item {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
-      font-size: clamp(28px, 4vw, 52px);
+      font-size: clamp(24px, 3.5vw, 48px);
       text-transform: uppercase;
       letter-spacing: -0.01em;
       white-space: nowrap;
-      padding: 0 32px;
+      padding: 0 28px;
       color: var(--black);
     }
 
     .ticker-item span { color: var(--blue); }
+
     .ticker-dot {
-      font-size: 0.6em;
       color: var(--orange);
-      vertical-align: middle;
-      padding: 0 8px;
+      padding: 0 10px;
     }
 
     /* ── NAV DOTS ─────────────────────────────────────── */
     .nav-dots {
       position: fixed;
-      right: 28px;
+      right: 24px;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
@@ -199,7 +210,6 @@
       overflow: hidden;
     }
 
-    /* большая декоративная надпись за секцией */
     .section-bg-word {
       position: absolute;
       top: 50%;
@@ -207,7 +217,7 @@
       transform: translateY(-50%);
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
-      font-size: clamp(120px, 18vw, 260px);
+      font-size: clamp(100px, 18vw, 260px);
       text-transform: uppercase;
       color: var(--blue);
       opacity: 0.04;
@@ -218,10 +228,20 @@
       user-select: none;
     }
 
+    /* оранжевая курсивная декоративная подпись в секции */
+    .section-cursive {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(28px, 4vw, 56px);
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 4px;
+      display: block;
+    }
+
     .section-header {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 48px;
       position: relative;
       z-index: 1;
@@ -239,10 +259,13 @@
     .section-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
-      font-size: clamp(36px, 6vw, 72px);
+      font-size: clamp(32px, 5.5vw, 68px);
       text-transform: uppercase;
       color: var(--black);
-      line-height: 0.9;
+      line-height: 0.92;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
     }
 
     .section-title span { color: var(--blue); }
@@ -253,7 +276,32 @@
       color: #666;
       font-weight: 300;
       max-width: 560px;
-      margin-top: 16px;
+      margin-top: 14px;
+    }
+
+    /* декоративный разделитель */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0e0e0;
+    }
+
+    .section-divider-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
     }
 
     /* ── CAROUSEL ─────────────────────────────────────── */
@@ -276,17 +324,29 @@
     .carousel-item {
       flex: 0 0 auto;
       scroll-snap-align: start;
-      width: clamp(260px, 32vw, 420px);
+      width: clamp(240px, 32vw, 420px);
       aspect-ratio: 4/3;
       background: var(--gray);
       border: 1.5px solid #e0e0e0;
       overflow: hidden;
       transition: transform .3s, box-shadow .3s;
+      position: relative;
     }
 
+    .carousel-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 0px solid var(--blue);
+      transition: border-width .25s;
+      pointer-events: none;
+    }
+
+    .carousel-item:hover::after { border-width: 3px; }
+
     .carousel-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(20,0,255,.1);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(20,0,255,.12);
     }
 
     .carousel-item img {
@@ -340,7 +400,7 @@
 
     .cta-bg {
       position: absolute;
-      bottom: -0.1em;
+      bottom: -0.05em;
       left: -0.02em;
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
@@ -352,6 +412,14 @@
       white-space: nowrap;
       user-select: none;
       line-height: 1;
+    }
+
+    .cta-cursive {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(32px, 5vw, 64px);
+      color: var(--orange);
+      position: relative;
+      z-index: 1;
     }
 
     .cta-title {
@@ -401,14 +469,21 @@
       justify-content: space-between;
     }
 
+    /* ── RESPONSIVE ───────────────────────────────────── */
     @media (max-width: 600px) {
       .nav-dots { display: none; }
       .hero { padding: 60px 6vw 60px; }
+      .hero-title-line { font-size: clamp(80px, 22vw, 160px); }
       .section { padding: 60px 6vw; }
+      .section-title {
+        font-size: clamp(28px, 8vw, 48px);
+        word-break: break-word;
+        hyphens: auto;
+      }
       .cta { padding: 80px 6vw; }
       footer { flex-direction: column; gap: 8px; }
-      .hero-bullets { gap: 24px; }
-      .section-bg-word { opacity: 0.03; }
+      .hero-bullets { gap: 20px; }
+      .section-bg-word { opacity: 0.03; font-size: 30vw; }
     }
   </style>
 </head>
@@ -430,8 +505,10 @@
 <section class="hero" id="hero">
   <div class="hero-sub">Емельянова Елизавета Евгеньевна</div>
   <div class="hero-title-wrap">
-    <span class="hero-title">ПОРТФОЛИО</span>
-    <span class="hero-cursive">Portfolio</span>
+    <span class="hero-title-line">ПОРТ</span>
+    <span class="hero-title-line hero-title-line2">ФОЛИО
+      <span class="hero-cursive">Portfolio</span>
+    </span>
   </div>
   <p class="hero-desc">
     Портфолио в сфере дизайна и разработки фирменного стиля проектов:
@@ -462,11 +539,12 @@
   </div>
 </div>
 
-<!-- ── БАННЕРЫ: ОФФЛАЙН БИЗНЕС ───────────────────────── -->
+<!-- ── БАННЕРЫ: ОФФЛАЙН ───────────────────────────────── -->
 <section class="section" id="banners-offline">
   <div class="section-bg-word">ОФФЛАЙН</div>
   <div class="section-header">
     <div class="section-label">01 / Баннеры для социальных сетей</div>
+    <span class="section-cursive">Offline</span>
     <h2 class="section-title">Оффлайн<br><span>бизнес</span></h2>
     <p class="section-desc">
       Визуальные решения для продвижения оффлайн-бизнеса в социальных сетях:
@@ -474,19 +552,20 @@
       и отражении физического пространства бренда.
     </p>
   </div>
+  <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c1">
-      <div class="carousel-item"><img src="images/banner_offline_01.png" alt="Оффлайн баннер 1" /></div>
-      <div class="carousel-item"><img src="images/banner_offline_02.png" alt="Оффлайн баннер 2" /></div>
-      <div class="carousel-item"><img src="images/banner_offline_03.png" alt="Оффлайн баннер 3" /></div>
-      <div class="carousel-item"><img src="images/banner_offline_04.png" alt="Оффлайн баннер 4" /></div>
-      <div class="carousel-item"><img src="images/banner_offline_05.png" alt="Оффлайн баннер 5" /></div>
-      <div class="carousel-item"><img src="images/banner_offline_06.png" alt="Оффлайн баннер 6" /></div>
-      <div class="carousel-item"><img src="images/banner_offline_07.png" alt="Оффлайн баннер 7" /></div>
-      <div class="carousel-item"><img src="images/banner_offline_08.png" alt="Оффлайн баннер 8" /></div>
-      <div class="carousel-item"><img src="images/banner_offline_09.png" alt="Оффлайн баннер 9" /></div>
-      <div class="carousel-item"><img src="images/banner_offline_10.png" alt="Оффлайн баннер 10" /></div>
-      <div class="carousel-item"><img src="images/banner_offline_11.png" alt="Оффлайн баннер 11" /></div>
+      <div class="carousel-item"><img src="banner_offline_01.png" alt="Оффлайн баннер 1" /></div>
+      <div class="carousel-item"><img src="banner_offline_02.png" alt="Оффлайн баннер 2" /></div>
+      <div class="carousel-item"><img src="banner_offline_03.png" alt="Оффлайн баннер 3" /></div>
+      <div class="carousel-item"><img src="banner_offline_04.png" alt="Оффлайн баннер 4" /></div>
+      <div class="carousel-item"><img src="banner_offline_05.png" alt="Оффлайн баннер 5" /></div>
+      <div class="carousel-item"><img src="banner_offline_06.png" alt="Оффлайн баннер 6" /></div>
+      <div class="carousel-item"><img src="banner_offline_07.png" alt="Оффлайн баннер 7" /></div>
+      <div class="carousel-item"><img src="banner_offline_08.png" alt="Оффлайн баннер 8" /></div>
+      <div class="carousel-item"><img src="banner_offline_09.png" alt="Оффлайн баннер 9" /></div>
+      <div class="carousel-item"><img src="banner_offline_10.png" alt="Оффлайн баннер 10" /></div>
+      <div class="carousel-item"><img src="banner_offline_11.png" alt="Оффлайн баннер 11" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -500,11 +579,12 @@
   </div>
 </section>
 
-<!-- ── БАННЕРЫ: ОНЛАЙН БИЗНЕС ────────────────────────── -->
+<!-- ── БАННЕРЫ: ОНЛАЙН ────────────────────────────────── -->
 <section class="section" id="banners-online">
   <div class="section-bg-word">ОНЛАЙН</div>
   <div class="section-header">
     <div class="section-label">02 / Баннеры для социальных сетей</div>
+    <span class="section-cursive">Online</span>
     <h2 class="section-title">Онлайн<br><span>бизнес</span></h2>
     <p class="section-desc">
       Баннеры для онлайн-проектов, digital-продуктов и e-commerce.
@@ -512,17 +592,18 @@
       через визуальный контент в социальных сетях.
     </p>
   </div>
+  <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c2">
-      <div class="carousel-item"><img src="images/banner_online_01.png" alt="Онлайн баннер 1" /></div>
-      <div class="carousel-item"><img src="images/banner_online_02.png" alt="Онлайн баннер 2" /></div>
-      <div class="carousel-item"><img src="images/banner_online_03.png" alt="Онлайн баннер 3" /></div>
-      <div class="carousel-item"><img src="images/banner_online_04.png" alt="Онлайн баннер 4" /></div>
-      <div class="carousel-item"><img src="images/banner_online_05.png" alt="Онлайн баннер 5" /></div>
-      <div class="carousel-item"><img src="images/banner_online_06.png" alt="Онлайн баннер 6" /></div>
-      <div class="carousel-item"><img src="images/banner_online_07.png" alt="Онлайн баннер 7" /></div>
-      <div class="carousel-item"><img src="images/banner_online_08.png" alt="Онлайн баннер 8" /></div>
-      <div class="carousel-item"><img src="images/banner_online_09.png" alt="Онлайн баннер 9" /></div>
+      <div class="carousel-item"><img src="banner_online_01.png" alt="Онлайн баннер 1" /></div>
+      <div class="carousel-item"><img src="banner_online_02.png" alt="Онлайн баннер 2" /></div>
+      <div class="carousel-item"><img src="banner_online_03.png" alt="Онлайн баннер 3" /></div>
+      <div class="carousel-item"><img src="banner_online_04.png" alt="Онлайн баннер 4" /></div>
+      <div class="carousel-item"><img src="banner_online_05.png" alt="Онлайн баннер 5" /></div>
+      <div class="carousel-item"><img src="banner_online_06.png" alt="Онлайн баннер 6" /></div>
+      <div class="carousel-item"><img src="banner_online_07.png" alt="Онлайн баннер 7" /></div>
+      <div class="carousel-item"><img src="banner_online_08.png" alt="Онлайн баннер 8" /></div>
+      <div class="carousel-item"><img src="banner_online_09.png" alt="Онлайн баннер 9" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -541,6 +622,7 @@
   <div class="section-bg-word">БРЕНД</div>
   <div class="section-header">
     <div class="section-label">03 / Баннеры для социальных сетей</div>
+    <span class="section-cursive">Personal</span>
     <h2 class="section-title">Личный<br><span>бренд</span></h2>
     <p class="section-desc">
       Визуальная идентичность для экспертов, специалистов и авторских
@@ -548,15 +630,16 @@
       и профессионализм через контент в социальных сетях.
     </p>
   </div>
+  <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c3">
-      <div class="carousel-item"><img src="images/banner_personal_01.png" alt="Личный бренд 1" /></div>
-      <div class="carousel-item"><img src="images/banner_personal_02.png" alt="Личный бренд 2" /></div>
-      <div class="carousel-item"><img src="images/banner_personal_03.png" alt="Личный бренд 3" /></div>
-      <div class="carousel-item"><img src="images/banner_personal_04.png" alt="Личный бренд 4" /></div>
-      <div class="carousel-item"><img src="images/banner_personal_05.png" alt="Личный бренд 5" /></div>
-      <div class="carousel-item"><img src="images/banner_personal_06.png" alt="Личный бренд 6" /></div>
-      <div class="carousel-item"><img src="images/banner_personal_07.png" alt="Личный бренд 7" /></div>
+      <div class="carousel-item"><img src="banner_personal_01.png" alt="Личный бренд 1" /></div>
+      <div class="carousel-item"><img src="banner_personal_02.png" alt="Личный бренд 2" /></div>
+      <div class="carousel-item"><img src="banner_personal_03.png" alt="Личный бренд 3" /></div>
+      <div class="carousel-item"><img src="banner_personal_04.png" alt="Личный бренд 4" /></div>
+      <div class="carousel-item"><img src="banner_personal_05.png" alt="Личный бренд 5" /></div>
+      <div class="carousel-item"><img src="banner_personal_06.png" alt="Личный бренд 6" /></div>
+      <div class="carousel-item"><img src="banner_personal_07.png" alt="Личный бренд 7" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -575,23 +658,25 @@
   <div class="section-bg-word">МЕТОД</div>
   <div class="section-header">
     <div class="section-label">04 / Категория</div>
-    <h2 class="section-title">Методологические<br><span>материалы</span></h2>
+    <span class="section-cursive">Methodology</span>
+    <h2 class="section-title">Методо­логи­ческие<br><span>материалы</span></h2>
     <p class="section-desc">
       Разработка методологической раздатки, рабочих тетрадей и учебных
       материалов. Структурированная подача информации с акцентом на
       удобство восприятия и фирменный стиль заказчика.
     </p>
   </div>
+  <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c4">
-      <div class="carousel-item"><img src="images/method_01.png" alt="Методматериал 1" /></div>
-      <div class="carousel-item"><img src="images/method_02.png" alt="Методматериал 2" /></div>
-      <div class="carousel-item"><img src="images/method_03.png" alt="Методматериал 3" /></div>
-      <div class="carousel-item"><img src="images/method_04.png" alt="Методматериал 4" /></div>
-      <div class="carousel-item"><img src="images/method_05.png" alt="Методматериал 5" /></div>
-      <div class="carousel-item"><img src="images/method_06.png" alt="Методматериал 6" /></div>
-      <div class="carousel-item"><img src="images/method_07.png" alt="Методматериал 7" /></div>
-      <div class="carousel-item"><img src="images/method_08.png" alt="Методматериал 8" /></div>
+      <div class="carousel-item"><img src="method_01.png" alt="Методматериал 1" /></div>
+      <div class="carousel-item"><img src="method_02.png" alt="Методматериал 2" /></div>
+      <div class="carousel-item"><img src="method_03.png" alt="Методматериал 3" /></div>
+      <div class="carousel-item"><img src="method_04.png" alt="Методматериал 4" /></div>
+      <div class="carousel-item"><img src="method_05.png" alt="Методматериал 5" /></div>
+      <div class="carousel-item"><img src="method_06.png" alt="Методматериал 6" /></div>
+      <div class="carousel-item"><img src="method_07.png" alt="Методматериал 7" /></div>
+      <div class="carousel-item"><img src="method_08.png" alt="Методматериал 8" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -610,6 +695,7 @@
   <div class="section-bg-word">САЙТЫ</div>
   <div class="section-header">
     <div class="section-label">05 / Категория</div>
+    <span class="section-cursive">Web</span>
     <h2 class="section-title"><span>Сайты</span></h2>
     <p class="section-desc">
       Дизайн и вёрстка лендингов под ключ: от разработки концепции и
@@ -617,13 +703,14 @@
       и визуальную целостность проекта.
     </p>
   </div>
+  <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c5">
-      <div class="carousel-item"><img src="images/site_01.png" alt="Сайт 1" /></div>
-      <div class="carousel-item"><img src="images/site_02.png" alt="Сайт 2" /></div>
-      <div class="carousel-item"><img src="images/site_03.png" alt="Сайт 3" /></div>
-      <div class="carousel-item"><img src="images/site_04.png" alt="Сайт 4" /></div>
-      <div class="carousel-item"><img src="images/site_05.png" alt="Сайт 5" /></div>
+      <div class="carousel-item"><img src="site_01.png" alt="Сайт 1" /></div>
+      <div class="carousel-item"><img src="site_02.png" alt="Сайт 2" /></div>
+      <div class="carousel-item"><img src="site_03.png" alt="Сайт 3" /></div>
+      <div class="carousel-item"><img src="site_04.png" alt="Сайт 4" /></div>
+      <div class="carousel-item"><img src="site_05.png" alt="Сайт 5" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -642,6 +729,7 @@
   <div class="section-bg-word">ПЕЧАТЬ</div>
   <div class="section-header">
     <div class="section-label">06 / Категория</div>
+    <span class="section-cursive">Print</span>
     <h2 class="section-title">Фирменная<br><span>печатная продукция</span></h2>
     <p class="section-desc">
       Разработка фирменной печатной продукции: визитки, буклеты, листовки,
@@ -649,13 +737,14 @@
       к печати и соответствие фирменному стилю бренда.
     </p>
   </div>
+  <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c6">
-      <div class="carousel-item"><img src="images/print_01.png" alt="Печать 1" /></div>
-      <div class="carousel-item"><img src="images/print_02.png" alt="Печать 2" /></div>
-      <div class="carousel-item"><img src="images/print_03.png" alt="Печать 3" /></div>
-      <div class="carousel-item"><img src="images/print_04.png" alt="Печать 4" /></div>
-      <div class="carousel-item"><img src="images/print_05.png" alt="Печать 5" /></div>
+      <div class="carousel-item"><img src="print_01.png" alt="Печать 1" /></div>
+      <div class="carousel-item"><img src="print_02.png" alt="Печать 2" /></div>
+      <div class="carousel-item"><img src="print_03.png" alt="Печать 3" /></div>
+      <div class="carousel-item"><img src="print_04.png" alt="Печать 4" /></div>
+      <div class="carousel-item"><img src="print_05.png" alt="Печать 5" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -672,6 +761,7 @@
 <!-- ── CTA ────────────────────────────────────────────── -->
 <section class="cta" id="contact">
   <div class="cta-bg">КОНТАКТ</div>
+  <div class="cta-cursive">Let's work</div>
   <div class="cta-title">
     Давайте<br>
     <span class="line2">работать вместе</span>
