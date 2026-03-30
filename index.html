@@ -97,6 +97,8 @@
       z-index: 2;
       pointer-events: none;
       white-space: nowrap;
+      text-transform: none !important;
+      font-weight: 400;
     }
 
     .hero-desc {
@@ -172,11 +174,7 @@
     }
 
     .ticker-item span { color: var(--blue); }
-
-    .ticker-dot {
-      color: var(--orange);
-      padding: 0 10px;
-    }
+    .ticker-dot { color: var(--orange); padding: 0 10px; }
 
     /* ── NAV DOTS ─────────────────────────────────────── */
     .nav-dots {
@@ -228,7 +226,6 @@
       user-select: none;
     }
 
-    /* оранжевая курсивная декоративная подпись в секции */
     .section-cursive {
       font-family: 'Great Vibes', cursive;
       font-size: clamp(28px, 4vw, 56px);
@@ -236,6 +233,8 @@
       line-height: 1;
       margin-bottom: 4px;
       display: block;
+      text-transform: none !important;
+      font-weight: 400;
     }
 
     .section-header {
@@ -279,7 +278,6 @@
       margin-top: 14px;
     }
 
-    /* декоративный разделитель */
     .section-divider {
       display: flex;
       align-items: center;
@@ -316,6 +314,7 @@
       scrollbar-width: none;
       cursor: grab;
       padding-bottom: 4px;
+      align-items: flex-start;
     }
 
     .carousel::-webkit-scrollbar { display: none; }
@@ -325,36 +324,45 @@
       flex: 0 0 auto;
       scroll-snap-align: start;
       width: clamp(240px, 32vw, 420px);
-      aspect-ratio: 4/3;
       background: var(--gray);
       border: 1.5px solid #e0e0e0;
       overflow: hidden;
       transition: transform .3s, box-shadow .3s;
       position: relative;
+      cursor: zoom-in;
     }
-
-    .carousel-item::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border: 0px solid var(--blue);
-      transition: border-width .25s;
-      pointer-events: none;
-    }
-
-    .carousel-item:hover::after { border-width: 3px; }
 
     .carousel-item:hover {
       transform: translateY(-5px);
       box-shadow: 0 16px 48px rgba(20,0,255,.12);
+      border-color: var(--blue);
     }
 
     .carousel-item img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
     }
+
+    /* подсказка при наведении */
+    .carousel-item::after {
+      content: '↗';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .carousel-item:hover::after { opacity: 1; }
 
     .carousel-controls {
       display: flex;
@@ -385,6 +393,80 @@
       font-size: 12px;
       letter-spacing: 0.2em;
       color: #aaa;
+    }
+
+    /* ── LIGHTBOX ─────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100vh;
+      object-fit: contain;
+      box-shadow: 0 0 80px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 32px;
+      color: var(--white);
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      transition: opacity .2s;
+      background: none;
+      border: none;
+      font-family: sans-serif;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+
+    .lightbox-prev:hover,
+    .lightbox-next:hover { background: var(--blue); border-color: var(--blue); }
+
+    .lightbox-prev svg,
+    .lightbox-next svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      letter-spacing: 0.2em;
     }
 
     /* ── CTA ──────────────────────────────────────────── */
@@ -420,6 +502,8 @@
       color: var(--orange);
       position: relative;
       z-index: 1;
+      text-transform: none !important;
+      font-weight: 400;
     }
 
     .cta-title {
@@ -469,25 +553,34 @@
       justify-content: space-between;
     }
 
-    /* ── RESPONSIVE ───────────────────────────────────── */
     @media (max-width: 600px) {
       .nav-dots { display: none; }
       .hero { padding: 60px 6vw 60px; }
       .hero-title-line { font-size: clamp(80px, 22vw, 160px); }
       .section { padding: 60px 6vw; }
-      .section-title {
-        font-size: clamp(28px, 8vw, 48px);
-        word-break: break-word;
-        hyphens: auto;
-      }
+      .section-title { font-size: clamp(28px, 8vw, 48px); }
       .cta { padding: 80px 6vw; }
       footer { flex-direction: column; gap: 8px; }
       .hero-bullets { gap: 20px; }
-      .section-bg-word { opacity: 0.03; font-size: 30vw; }
+      .lightbox-prev { left: 4px; }
+      .lightbox-next { right: 4px; }
     }
   </style>
 </head>
 <body>
+
+<!-- ── LIGHTBOX ───────────────────────────────────────── -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <img id="lightbox-img" src="" alt="" />
+  <button class="lightbox-next" onclick="lightboxNav(1)">
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+</div>
 
 <!-- ── NAV DOTS ───────────────────────────────────────── -->
 <nav class="nav-dots">
@@ -555,17 +648,17 @@
   <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c1">
-      <div class="carousel-item"><img src="banner_offline_01.png" alt="Оффлайн баннер 1" /></div>
-      <div class="carousel-item"><img src="banner_offline_02.png" alt="Оффлайн баннер 2" /></div>
-      <div class="carousel-item"><img src="banner_offline_03.png" alt="Оффлайн баннер 3" /></div>
-      <div class="carousel-item"><img src="banner_offline_04.png" alt="Оффлайн баннер 4" /></div>
-      <div class="carousel-item"><img src="banner_offline_05.png" alt="Оффлайн баннер 5" /></div>
-      <div class="carousel-item"><img src="banner_offline_06.png" alt="Оффлайн баннер 6" /></div>
-      <div class="carousel-item"><img src="banner_offline_07.png" alt="Оффлайн баннер 7" /></div>
-      <div class="carousel-item"><img src="banner_offline_08.png" alt="Оффлайн баннер 8" /></div>
-      <div class="carousel-item"><img src="banner_offline_09.png" alt="Оффлайн баннер 9" /></div>
-      <div class="carousel-item"><img src="banner_offline_10.png" alt="Оффлайн баннер 10" /></div>
-      <div class="carousel-item"><img src="banner_offline_11.png" alt="Оффлайн баннер 11" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_01.png" alt="Оффлайн баннер 1" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_02.png" alt="Оффлайн баннер 2" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_03.png" alt="Оффлайн баннер 3" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_04.png" alt="Оффлайн баннер 4" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_05.png" alt="Оффлайн баннер 5" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_06.png" alt="Оффлайн баннер 6" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_07.png" alt="Оффлайн баннер 7" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_08.png" alt="Оффлайн баннер 8" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_09.png" alt="Оффлайн баннер 9" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_10.png" alt="Оффлайн баннер 10" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_offline_11.png" alt="Оффлайн баннер 11" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -595,15 +688,15 @@
   <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c2">
-      <div class="carousel-item"><img src="banner_online_01.png" alt="Онлайн баннер 1" /></div>
-      <div class="carousel-item"><img src="banner_online_02.png" alt="Онлайн баннер 2" /></div>
-      <div class="carousel-item"><img src="banner_online_03.png" alt="Онлайн баннер 3" /></div>
-      <div class="carousel-item"><img src="banner_online_04.png" alt="Онлайн баннер 4" /></div>
-      <div class="carousel-item"><img src="banner_online_05.png" alt="Онлайн баннер 5" /></div>
-      <div class="carousel-item"><img src="banner_online_06.png" alt="Онлайн баннер 6" /></div>
-      <div class="carousel-item"><img src="banner_online_07.png" alt="Онлайн баннер 7" /></div>
-      <div class="carousel-item"><img src="banner_online_08.png" alt="Онлайн баннер 8" /></div>
-      <div class="carousel-item"><img src="banner_online_09.png" alt="Онлайн баннер 9" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_online_01.png" alt="Онлайн баннер 1" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_online_02.png" alt="Онлайн баннер 2" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_online_03.png" alt="Онлайн баннер 3" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_online_04.png" alt="Онлайн баннер 4" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_online_05.png" alt="Онлайн баннер 5" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_online_06.png" alt="Онлайн баннер 6" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_online_07.png" alt="Онлайн баннер 7" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_online_08.png" alt="Онлайн баннер 8" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_online_09.png" alt="Онлайн баннер 9" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -633,13 +726,13 @@
   <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c3">
-      <div class="carousel-item"><img src="banner_personal_01.png" alt="Личный бренд 1" /></div>
-      <div class="carousel-item"><img src="banner_personal_02.png" alt="Личный бренд 2" /></div>
-      <div class="carousel-item"><img src="banner_personal_03.png" alt="Личный бренд 3" /></div>
-      <div class="carousel-item"><img src="banner_personal_04.png" alt="Личный бренд 4" /></div>
-      <div class="carousel-item"><img src="banner_personal_05.png" alt="Личный бренд 5" /></div>
-      <div class="carousel-item"><img src="banner_personal_06.png" alt="Личный бренд 6" /></div>
-      <div class="carousel-item"><img src="banner_personal_07.png" alt="Личный бренд 7" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_personal_01.png" alt="Личный бренд 1" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_personal_02.png" alt="Личный бренд 2" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_personal_03.png" alt="Личный бренд 3" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_personal_04.png" alt="Личный бренд 4" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_personal_05.png" alt="Личный бренд 5" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_personal_06.png" alt="Личный бренд 6" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="banner_personal_07.png" alt="Личный бренд 7" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -669,14 +762,14 @@
   <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c4">
-      <div class="carousel-item"><img src="method_01.png" alt="Методматериал 1" /></div>
-      <div class="carousel-item"><img src="method_02.png" alt="Методматериал 2" /></div>
-      <div class="carousel-item"><img src="method_03.png" alt="Методматериал 3" /></div>
-      <div class="carousel-item"><img src="method_04.png" alt="Методматериал 4" /></div>
-      <div class="carousel-item"><img src="method_05.png" alt="Методматериал 5" /></div>
-      <div class="carousel-item"><img src="method_06.png" alt="Методматериал 6" /></div>
-      <div class="carousel-item"><img src="method_07.png" alt="Методматериал 7" /></div>
-      <div class="carousel-item"><img src="method_08.png" alt="Методматериал 8" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="method_01.png" alt="Методматериал 1" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="method_02.png" alt="Методматериал 2" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="method_03.png" alt="Методматериал 3" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="method_04.png" alt="Методматериал 4" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="method_05.png" alt="Методматериал 5" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="method_06.png" alt="Методматериал 6" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="method_07.png" alt="Методматериал 7" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="method_08.png" alt="Методматериал 8" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -706,11 +799,11 @@
   <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c5">
-      <div class="carousel-item"><img src="site_01.png" alt="Сайт 1" /></div>
-      <div class="carousel-item"><img src="site_02.png" alt="Сайт 2" /></div>
-      <div class="carousel-item"><img src="site_03.png" alt="Сайт 3" /></div>
-      <div class="carousel-item"><img src="site_04.png" alt="Сайт 4" /></div>
-      <div class="carousel-item"><img src="site_05.png" alt="Сайт 5" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="site_01.png" alt="Сайт 1" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="site_02.png" alt="Сайт 2" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="site_03.png" alt="Сайт 3" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="site_04.png" alt="Сайт 4" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="site_05.png" alt="Сайт 5" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -740,11 +833,11 @@
   <div class="section-divider"><div class="section-divider-dot"></div></div>
   <div class="carousel-wrap">
     <div class="carousel" id="c6">
-      <div class="carousel-item"><img src="print_01.png" alt="Печать 1" /></div>
-      <div class="carousel-item"><img src="print_02.png" alt="Печать 2" /></div>
-      <div class="carousel-item"><img src="print_03.png" alt="Печать 3" /></div>
-      <div class="carousel-item"><img src="print_04.png" alt="Печать 4" /></div>
-      <div class="carousel-item"><img src="print_05.png" alt="Печать 5" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="print_01.png" alt="Печать 1" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="print_02.png" alt="Печать 2" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="print_03.png" alt="Печать 3" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="print_04.png" alt="Печать 4" /></div>
+      <div class="carousel-item" onclick="openLightbox(this)"><img src="print_05.png" alt="Печать 5" /></div>
     </div>
   </div>
   <div class="carousel-controls">
@@ -779,15 +872,17 @@
 </footer>
 
 <script>
+  // ── карусели ──────────────────────────────────────────
   const ids = ['c1','c2','c3','c4','c5','c6'];
 
   ids.forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
-    let isDown = false, startX, scrollLeft;
+    let isDown = false, startX, scrollLeft, moved = false;
 
     el.addEventListener('mousedown', e => {
-      isDown = true; el.classList.add('grabbing');
+      isDown = true; moved = false;
+      el.classList.add('grabbing');
       startX = e.pageX - el.offsetLeft;
       scrollLeft = el.scrollLeft;
     });
@@ -796,8 +891,14 @@
     el.addEventListener('mousemove',  e => {
       if (!isDown) return;
       e.preventDefault();
+      moved = true;
       el.scrollLeft = scrollLeft - (e.pageX - el.offsetLeft - startX) * 1.2;
     });
+
+    // не открывать лайтбокс если перетаскивали
+    el.addEventListener('click', e => {
+      if (moved) e.stopPropagation();
+    }, true);
 
     let touchX;
     el.addEventListener('touchstart', e => {
@@ -829,6 +930,53 @@
       String(current).padStart(2,'0') + ' / ' + String(items.length).padStart(2,'0');
   }
 
+  // ── лайтбокс ──────────────────────────────────────────
+  let allImages = [];
+  let currentIndex = 0;
+
+  function openLightbox(item) {
+    const img = item.querySelector('img');
+    if (!img) return;
+
+    // собираем все картинки со всех каруселей
+    allImages = Array.from(document.querySelectorAll('.carousel-item img'));
+    currentIndex = allImages.indexOf(img);
+
+    showLightboxImage(currentIndex);
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function showLightboxImage(idx) {
+    const lb = document.getElementById('lightbox-img');
+    lb.src = allImages[idx].src;
+    lb.alt = allImages[idx].alt;
+    document.getElementById('lightbox-counter').textContent =
+      String(idx + 1).padStart(2,'0') + ' / ' + String(allImages.length).padStart(2,'0');
+  }
+
+  function lightboxNav(dir) {
+    currentIndex = (currentIndex + dir + allImages.length) % allImages.length;
+    showLightboxImage(currentIndex);
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeLightboxOutside(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') lightboxNav(1);
+    if (e.key === 'ArrowLeft')  lightboxNav(-1);
+  });
+
+  // ── nav dots ──────────────────────────────────────────
   const sections = document.querySelectorAll('section[id]');
   const dots = document.querySelectorAll('.nav-dots a');
   sections.forEach(s => {
