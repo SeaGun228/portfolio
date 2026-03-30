@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Портфолио — Емельянова Елизавета</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Great+Vibes&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:   #1400FF;
+      --orange: #E03010;
+      --black:  #111111;
+      --white:  #FFFFFF;
+      --gray:   #F4F4F4;
+      --border: #222222;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 8vw 60px;
+      position: relative;
+      border-bottom: 2px solid var(--border);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(20,0,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,0,255,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(14px, 1.5vw, 18px);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    .hero-title-wrap {
+      position: relative;
+      display: inline-block;
+      line-height: 0.88;
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(80px, 16vw, 220px);
+      text-transform: uppercase;
+      color: var(--blue);
+      letter-spacing: -0.01em;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-cursive {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(50px, 10vw, 140px);
+      color: var(--orange);
+      position: absolute;
+      bottom: -0.15em;
+      right: -0.05em;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-desc {
+      margin-top: 60px;
+      max-width: 620px;
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.7;
+      color: #444;
+      font-weight: 300;
+    }
+
+    /* ── NAV DOTS ─────────────────────────────────────── */
+    .nav-dots {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .nav-dots a {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ccc;
+      display: block;
+      transition: background .25s, transform .25s;
+    }
+
+    .nav-dots a.active,
+    .nav-dots a:hover { background: var(--blue); transform: scale(1.4); }
+
+    /* ── SECTION ──────────────────────────────────────── */
+    .section {
+      padding: 100px 8vw;
+      border-bottom: 1.5px solid #e0e0e0;
+    }
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(36px, 6vw, 72px);
+      text-transform: uppercase;
+      color: var(--black);
+      line-height: 0.9;
+      margin-bottom: 48px;
+    }
+
+    .section-title span { color: var(--blue); }
+
+    /* ── CAROUSEL ─────────────────────────────────────── */
+    .carousel-wrap { position: relative; overflow: hidden; }
+
+    .carousel {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      cursor: grab;
+      padding-bottom: 4px;
+    }
+
+    .carousel::-webkit-scrollbar { display: none; }
+    .carousel.grabbing { cursor: grabbing; }
+
+    .carousel-item {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: clamp(260px, 32vw, 420px);
+      aspect-ratio: 4/3;
+      background: var(--gray);
+      border: 1.5px solid #e0e0e0;
+      overflow: hidden;
+      position: relative;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .carousel-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(20,0,255,.1);
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-item.empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .carousel-item.empty .ph-icon { width: 48px; height: 48px; opacity: .15; }
+
+    .carousel-item.empty span {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #bbb;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background .2s, color .2s;
+    }
+
+    .carousel-arrow:hover { background: var(--blue); border-color: var(--blue); color: var(--white); }
+    .carousel-arrow svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .carousel-arrow.prev { left: 0; }
+    .carousel-arrow.next { right: 0; }
+
+    .carousel-counter {
+      margin-top: 16px;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: #aaa;
+    }
+
+    /* ── CTA ──────────────────────────────────────────── */
+    .cta {
+      padding: 120px 8vw;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+
+    .cta-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(40px, 8vw, 100px);
+      text-transform: uppercase;
+      line-height: 0.9;
+    }
+
+    .cta-title .line2 { color: var(--blue); }
+
+    .cta-contacts { display: flex; flex-wrap: wrap; gap: 16px; }
+
+    .cta-link {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      border-bottom: 1.5px solid var(--black);
+      padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+
+    .cta-link:hover { color: var(--blue); border-color: var(--blue); }
+
+    footer {
+      padding: 24px 8vw;
+      border-top: 1.5px solid #e0e0e0;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #bbb;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 600px) {
+      .nav-dots { display: none; }
+      .hero { padding: 60px 6vw 48px; }
+      .section { padding: 60px 6vw; }
+      .cta { padding: 80px 6vw; }
+      footer { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav-dots">
+  <a href="#hero"    class="active" title="Начало"></a>
+  <a href="#banners" title="Баннеры"></a>
+  <a href="#methmat" title="Методологические материалы"></a>
+  <a href="#sites"   title="Сайты"></a>
+  <a href="#print"   title="Печатная продукция"></a>
+  <a href="#contact" title="Контакты"></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-sub">Емельянова Елизавета Евгеньевна</div>
+  <div class="hero-title-wrap">
+    <span class="hero-title">ПОРТФОЛИО</span>
+    <span class="hero-cursive">Portfolio</span>
+  </div>
+  <p class="hero-desc">
+    Портфолио в сфере дизайна и разработки фирменного стиля проектов:
+    лендинги, баннеры для социальных сетей, фирменная печатная продукция,
+    методологическая раздатка.
+  </p>
+</section>
+
+<!-- БАННЕРЫ -->
+<section class="section" id="banners">
+  <div class="section-label">01 / Категория</div>
+  <h2 class="section-title">Баннеры для<br><span>социальных сетей</span></h2>
+  <div class="carousel-wrap">
+    <button class="carousel-arrow prev" onclick="scrollCarousel(-1,'c1')">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="carousel" id="c1">
+      <div class="carousel-item"><img src="images/banner_01.png" alt="Баннер 1" /></div>
+      <div class="carousel-item"><img src="images/banner_02.png" alt="Баннер 2" /></div>
+      <div class="carousel-item"><img src="images/banner_03.png" alt="Баннер 3" /></div>
+      <div class="carousel-item"><img src="images/banner_04.png" alt="Баннер 4" /></div>
+      <div class="carousel-item"><img src="images/banner_05.png" alt="Баннер 5" /></div>
+    </div>
+    <button class="carousel-arrow next" onclick="scrollCarousel(1,'c1')">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+  <div class="carousel-counter" id="c1-counter">01 / 05</div>
+</section>
+
+<!-- МЕТОДОЛОГИЧЕСКИЕ МАТЕРИАЛЫ -->
+<section class="section" id="methmat">
+  <div class="section-label">02 / Категория</div>
+  <h2 class="section-title">Методологические<br><span>материалы</span></h2>
+  <div class="carousel-wrap">
+    <button class="carousel-arrow prev" onclick="scrollCarousel(-1,'c2')">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="carousel" id="c2">
+      <div class="carousel-item"><img src="images/method_01.png" alt="Методматериал 1" /></div>
+      <div class="carousel-item"><img src="images/method_02.png" alt="Методматериал 2" /></div>
+      <div class="carousel-item"><img src="images/method_03.png" alt="Методматериал 3" /></div>
+      <div class="carousel-item"><img src="images/method_04.png" alt="Методматериал 4" /></div>
+    </div>
+    <button class="carousel-arrow next" onclick="scrollCarousel(1,'c2')">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+  <div class="carousel-counter" id="c2-counter">01 / 04</div>
+</section>
+
+<!-- САЙТЫ -->
+<section class="section" id="sites">
+  <div class="section-label">03 / Категория</div>
+  <h2 class="section-title"><span>Сайты</span></h2>
+  <div class="carousel-wrap">
+    <button class="carousel-arrow prev" onclick="scrollCarousel(-1,'c3')">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="carousel" id="c3">
+      <div class="carousel-item"><img src="images/site_01.png" alt="Сайт 1" /></div>
+      <div class="carousel-item"><img src="images/site_02.png" alt="Сайт 2" /></div>
+      <div class="carousel-item"><img src="images/site_03.png" alt="Сайт 3" /></div>
+    </div>
+    <button class="carousel-arrow next" onclick="scrollCarousel(1,'c3')">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+  <div class="carousel-counter" id="c3-counter">01 / 03</div>
+</section>
+
+<!-- ФИРМЕННАЯ ПЕЧАТНАЯ ПРОДУКЦИЯ -->
+<section class="section" id="print">
+  <div class="section-label">04 / Категория</div>
+  <h2 class="section-title">Фирменная<br><span>печатная продукция</span></h2>
+  <div class="carousel-wrap">
+    <button class="carousel-arrow prev" onclick="scrollCarousel(-1,'c4')">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="carousel" id="c4">
+      <div class="carousel-item"><img src="images/print_01.png" alt="Печать 1" /></div>
+      <div class="carousel-item"><img src="images/print_02.png" alt="Печать 2" /></div>
+      <div class="carousel-item"><img src="images/print_03.png" alt="Печать 3" /></div>
+      <div class="carousel-item"><img src="images/print_04.png" alt="Печать 4" /></div>
+    </div>
+    <button class="carousel-arrow next" onclick="scrollCarousel(1,'c4')">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+  <div class="carousel-counter" id="c4-counter">01 / 04</div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="cta-title">
+    Давайте<br>
+    <span class="line2">работать вместе</span>
+  </div>
+  <div class="cta-contacts">
+    <a class="cta-link" href="mailto:your@email.com">your@email.com</a>
+    <a class="cta-link" href="https://t.me/yourusername" target="_blank">Telegram</a>
+    <a class="cta-link" href="https://behance.net/yourusername" target="_blank">Behance</a>
+  </div>
+</section>
+
+<footer>
+  <span>Емельянова Елизавета Евгеньевна</span>
+  <span>Дизайн &amp; фирменный стиль · 2025</span>
+</footer>
+
+<script>
+  const carousels = ['c1','c2','c3','c4'];
+
+  carousels.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    let isDown = false, startX, scrollLeft;
+
+    el.addEventListener('mousedown', e => {
+      isDown = true; el.classList.add('grabbing');
+      startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft;
+    });
+    el.addEventListener('mouseleave', () => { isDown = false; el.classList.remove('grabbing'); });
+    el.addEventListener('mouseup',    () => { isDown = false; el.classList.remove('grabbing'); });
+    el.addEventListener('mousemove',  e => {
+      if (!isDown) return;
+      e.preventDefault();
+      el.scrollLeft = scrollLeft - (e.pageX - el.offsetLeft - startX) * 1.2;
+    });
+
+    let touchX;
+    el.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; scrollLeft = el.scrollLeft; }, { passive: true });
+    el.addEventListener('touchmove',  e => { el.scrollLeft = scrollLeft + (touchX - e.touches[0].clientX); }, { passive: true });
+
+    el.addEventListener('scroll', () => updateCounter(id));
+  });
+
+  function scrollCarousel(dir, id) {
+    const el = document.getElementById(id);
+    const item = el.querySelector('.carousel-item');
+    el.scrollBy({ left: dir * (item.offsetWidth + 16), behavior: 'smooth' });
+    setTimeout(() => updateCounter(id), 350);
+  }
+
+  function updateCounter(id) {
+    const el = document.getElementById(id);
+    const items = el.querySelectorAll('.carousel-item');
+    const current = Math.round(el.scrollLeft / (items[0].offsetWidth + 16)) + 1;
+    document.getElementById(id + '-counter').textContent =
+      String(current).padStart(2,'0') + ' / ' + String(items.length).padStart(2,'0');
+  }
+
+  const sections = document.querySelectorAll('section[id]');
+  const dots = document.querySelectorAll('.nav-dots a');
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        dots.forEach(d => d.classList.remove('active'));
+        const a = document.querySelector(`.nav-dots a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 }).observe && sections.forEach(s =>
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          dots.forEach(d => d.classList.remove('active'));
+          const a = document.querySelector(`.nav-dots a[href="#${e.target.id}"]`);
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 }).observe(s)
+  );
+</script>
+</body>
+</html>
